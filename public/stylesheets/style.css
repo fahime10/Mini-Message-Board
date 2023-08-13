@@ -6,3 +6,39 @@ body {
 a {
   color: #00B7FF;
 }
+
+.messages {
+  border: 2px solid black;
+  margin-top: 0.5rem;
+}
+
+.individual {
+  margin: 0 1rem; 
+}
+
+.user {
+  border-bottom: 2px solid black; 
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+}
+
+.labels {
+  margin: 1rem 0 0.5rem 0;
+}
+
+button {
+  margin: 1rem auto 0;
+  padding: 1rem 5rem;
+  background-color: #00B7FF;
+  color: white;
+  border-radius: 5px;
+}
+
+button:hover {
+  transform: scale(0.9);
+  transition: ease-in-out, 0.5s;
+}
