@@ -8,15 +8,12 @@ block content
             label(for='name' class='labels') User: 
             input(type='text'
                 placeholder='Please enter your name'
-                name='name'
-                value=(undefined===name ? '' : message.name),
+                name='user'
                 required='true')
             
             label(for='text' class='labels') Message: 
-            input(type='text'
-                placeholder='Type your message here'
+            textarea(placeholder='Type your message here'
                 name='text'
-                value=(undefined===text ? '' : message.text),
                 required='true')
 
             button(type='submit') Submit
