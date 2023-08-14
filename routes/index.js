@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const { dateFormatter } = require('luxon');
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
+
+const Message = require('../models/message');
 
 require('dotenv').config();
 
@@ -18,7 +21,7 @@ main().catch((err) => console.log(err));
 async function main() {
   try {
     mongoose.connect(mongoDB);
-    const messages = await MessageChannel.find();
+    const messages = await Message.find();
     messagesArray = messages;
   } catch (err) {
     console.log(err);
@@ -27,25 +30,22 @@ async function main() {
 
 let messagesArray = [];
 
-// const messages = [
-//   {
-//     text: "Hi there!",
-//     user: "Amando",
-//     added: new Date(),
-//   },
-//   {
-//     text: "Hello World!",
-//     user: "Charles",
-//     added: new Date(),
-//   },
-// ];
-
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Mini Message Board', messages: messages });
+  res.render('index', { title: 'Mini Message Board', messages: messagesArray });
 });
 
 router.post('/new', async (req, res, next) => {
-  // TO DO
-})
+  const message = new Message({
+    text: req.body.text,
+    user: req.body.user,
+    added: dateFormatter.fromJSDate(new Date()).toLocaleString(dateFormatter.DATE_MED),
+  });
+
+  await message.save();
+
+  await main().catch((err) => console.log(err));
+
+  res.redirect('/');
+});
 
 module.exports = router;

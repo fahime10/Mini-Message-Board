@@ -1,4 +1,5 @@
 const userArgs = process.argv.slice(2);
+const { dateFormatter } = require('luxon');
 
 const Message = require('./models/message');
 
@@ -30,7 +31,7 @@ async function messageCreate(index, text, user, added) {
 async function createMessages() {
     console.log("Adding messages");
     await Promise.all([
-        messageCreate(0, "Hi there!", "Amando", new Date()),
-        messageCreate(1, "Hello World!", "Charles", new Date()),
+        messageCreate(0, "Hi there!", "Amando", dateFormatter.fromJSDate(new Date()).toLocaleString(dateFormatter.DATE_MED)),
+        messageCreate(1, "Hello World!", "Charles", dateFormatter.fromJSDate(new Date()).toLocaleString(dateFormatter.DATE_MED)),
     ]);
 }
