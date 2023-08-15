@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { dateFormatter } = require('luxon');
+const { DateTime } = require('luxon');
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
@@ -38,7 +38,7 @@ router.post('/new', async (req, res, next) => {
   const message = new Message({
     text: req.body.text,
     user: req.body.user,
-    added: dateFormatter.fromJSDate(new Date()).toLocaleString(dateFormatter.DATE_MED),
+    added: DateTime.fromJSDate(new Date()).toLocaleString(DateTime.DATE_MED),
   });
 
   await message.save();
